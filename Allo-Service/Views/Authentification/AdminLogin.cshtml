@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "_AdminLoginLayout";
+}
+
+<div class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+
+                <section class="login_content">
+
+                    <form asp-controller="Authentification" asp-action="AdminLogin" method="post">
+                        <h1>Admin Login</h1>
+                        <div>
+                            <input type="text" name="e" class="form-control" placeholder="Email de l'Administrateur">
+                        </div>
+                        <div>
+                            <input type="password" name="p" class="form-control" placeholder="Mot de Passe">
+                        </div>
+                        <div>
+                            <a class="btn btn-default submit" >Log in</a>
+                            @*                              <a class="reset_pass" href="#">Lost your password?</a>
+                            *@   <button class="btn btn-default w-100 mt-4">Se connecter</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            @*  <p class="change_link">
+                            New to site?
+                            <a href="#signup" class="to_register"> Create Account </a>
+                            </p>
+                            *@
+
+                            <div class="clearfix"></div>
+                            <br>
+
+                            <div>
+                                <h1><i class="fa fa-phone"></i> Allo Service</h1>
+                                <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

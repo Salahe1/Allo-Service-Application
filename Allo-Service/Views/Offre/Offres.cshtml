@@ -1,0 +1,110 @@
+﻿@model IEnumerable<dynamic>
+
+
+@{
+    Layout = "_HomeLayout";
+}
+
+
+
+@* <div id="loading" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+    <h2 style=" color:orange;">Loading...</h2>
+</div> *@
+@{
+    var isClientConnected = Context.Session.GetString("UserType") == "Client";
+    var currentDate = DateTime.Now;
+}
+
+<section class="w3l-grids-3 py-5">
+    <div class="container py-md-5 py-3">
+        <div class="row bottom_grids pt-md-3 text-left">
+            @foreach (var offre in Model)
+            {
+                // Check if the offer has expired
+                DateTime dateFin;
+                var isDateValid = DateTime.TryParse(offre.DateFin, out dateFin);
+
+                // Check if the offer has expired, only if the date is valid
+                var hasExpired = isDateValid && dateFin < currentDate;
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="grid-block scale-in-center" style=" filter: @(hasExpired ? "grayscale(100%)" : "none");">
+                        <img src="@offre.Photo" alt="Fournisseur Image" class="d-block w-100" style="height: 200px; object-fit: cover;">
+
+                        <h5 class="my-3">@offre.Title</h5>
+
+                        <hr class="my-2">
+
+                        <!-- Description -->
+                        <h6>
+                            <i class="fas fa-file-alt me-2"></i> <!-- Suggested: fas fa-info-circle or fas fa-align-left -->
+                            <strong>Description:</strong>  @offre.Description
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <h6>
+                            <i class="fas fa-calendar-alt me-2"></i> <!-- Changed from fas fa-city to fas fa-calendar-alt -->
+                            <strong>Date de Fin:</strong> @offre.DateFin
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <h6>
+                            <i class="fas fa-city  me-2"></i>
+                            <strong>ville:</strong> @offre.VilleName 
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <!-- Price -->
+                        <h6>
+                            <i class="fas fa-dollar-sign"></i> <!-- Changed from fas fa-phone to fas fa-dollar-sign -->
+                            <strong>Prix :</strong> @offre.Price dirham marrocain
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <div class="btn-group d-flex justify-content-between align-items-center">
+
+
+                            <form method="get" asp-controller="Offre" asp-action="liste">
+                                <input type="hidden" name="id" value="@offre.FournisseurId" />
+                                <button type="submit" class="btn btn-sm btn-success message-btn px-5"
+                                @if (!isClientConnected)
+                                {
+                                    <text>disabled</text>
+                                }>
+                                        <i class="fas fa-comments pr-1"></i> Message</button>
+                            </form>
+
+                            <form method="get" asp-controller="Offre" asp-action="ListeOffresFournisseur">
+                                <input type="hidden" name="id" value="@offre.FournisseurId" />
+                                <button type="submit" class="btn btn-sm btn-primary ml-1 px-4">
+                                    <i class="fas fa-eye pr-1"></i>Autres Offres
+                                </button> 
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        
+        const loading = document.getElementById("loading");
+        const content = document.querySelector("section");
+
+        loading.style.display = "none";
+        content.style.display = "block";
+    });
+</script>
+ *@@*  // Hide loading after a delay for demo purposes 
+        // Remove loading message and display content*@
+
+
+@*  // Replace this with actual load completion// Hide the loading indicator after the page content is fully loaded *@

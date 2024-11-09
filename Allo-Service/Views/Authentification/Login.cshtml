@@ -1,0 +1,55 @@
+﻿ @model UserVm; 
+
+@{
+    Layout = "_LoginLayout";
+}
+
+
+
+    <div class="row justify-content-center pt-5 pb-6">
+
+    <div class="col-md-6 pt-5 scale-in-center">
+        <div class="d-flex justify-content-center py-4">
+@* 
+            <a href="@Url.Action("Accueil","Home")" class="logo d-flex align-items-center w-auto">
+                <img src="~/Accueil/assets/images/allo-service.png" alt="" class="logo" style="width: 240px; height: auto;">
+            </a> *@
+
+        </div>
+
+            <div class=" shadow-lg rounded-1 ">
+
+                <div class="card-header text-center">
+                    <h2>Se Connecter</h2>
+                </div>
+
+                <div class="card-body ">
+                    <form method="post" asp-controller="Authentification" asp-action="Login">
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="login">Email</label>
+                            <input class="form-control"   type="text"  asp-for="Email"  placeholder="Entrez votre Email" />
+                            <span class="text-danger"  asp-validation-for="Email" ></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label" for="password">Mot de Passe</label>
+                            <input class="form-control"  type="password" asp-for="MotdePasse"  placeholder="Entrez votre mot de passe" />
+                            <span class="text-danger"  asp-validation-for="MotdePasse" ></span>
+                        </div>
+
+                        <button class="btn btn-primary w-100 mt-4">Se connecter</button>
+
+                    </form>
+
+                </div>
+
+                <div class="card-footer pb-3 pt-2">
+               Si tu n'a pas d'un account  <a asp-action="Inscription" asp-controller="Users">click here .</a>
+                </div>
+            </div>
+        <p>tu as un administrateur <a asp-action="AdminLogin">click ici</a>  </p>
+        </div>
+    </div>
+
+ 

@@ -1,0 +1,130 @@
+﻿@{
+ var userType = Context.Session.GetString("UserType");
+
+    Layout = userType == "Fournisseur" ? "_FournisseurLayout" : "_HomeLayout";
+
+}
+@model ProfilModificationVM;
+
+<section class="w3l-grids-3 py-5">
+  
+
+
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-7 scale-in-center">
+            <div class=" shadow-lg rounded-3 mb-3" style="width:100%;">
+                <!-- Added 'shadow-lg' and 'rounded-3' for style -->
+
+                <div class=" card-head pt-4 pb-2">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="~/imagesA/AdminAvatar.jpg" alt="Profile Picture" class="profile-picture radius-image-full mr-3" height="100px;">
+                        <div>
+                            <h4 class="title-subhny">@Model.Nom @Model.Prenom</h4>
+                            <p class="font-italic">@Model.Email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <form asp-action="ModifierProfil" asp-controller="Users" method="post" class="row g-3 needs-validation" enctype="multipart/form-data">
+                        <div class="col-md-6">
+                            <label asp-for="Nom" class="form-label"></label>
+                            <input asp-for="Nom" class="form-control" placeholder="Entrez votre nom" />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Prenom" class="form-label"></label>
+                            <input asp-for="Prenom" class="form-control" placeholder="Entrez votre prénom" />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="CIN" class="form-label"></label>
+                            <input asp-for="CIN" class="form-control" placeholder="Entrez votre CIN" />
+                            <span asp-validation-for="CIN" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Telephone" class="form-label"></label>
+                            <input asp-for="Telephone" class="form-control" placeholder="Entrez votre numéro : 06..." />
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Entrez votre email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label asp-for="villeId" class="form-label">Ville</label>
+                            <select asp-for="villeId" class="form-control" asp-items="Model.Villes">
+                                <option value="">Sélectionnez une ville</option>
+                            </select>
+                            <span asp-validation-for="villeId" class="text-danger"></span> <!-- Optional: Validation message -->
+                        </div>
+                        @if (userType == "Fournisseur")
+                        {
+                            <div class="col-md-6 ">
+                                <label asp-for="metierId" class="form-label">Métier </label>
+                                <select asp-for="metierId" class="form-control" asp-items="Model.Metiers">
+                                    <option value="">Sélectionnez un métier</option>
+                                </select>
+                                <span asp-validation-for="metierId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="photo" class="form-label">Photo de profil</label>
+                                <input asp-for="photo" type="file" class="form-control" placeholder="Choisi une photo " />
+                                <span asp-validation-for="photo" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="description" class="form-label">Description :</label>
+                                <textarea asp-for="description" type="file" class="form-control" placeholder="Describer ce que tu fais ... "></textarea>
+                                <span asp-validation-for="description" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 ">
+                                <label asp-for="disponibitlité" class="form-label">Tu es disponible ?</label>
+                                <div class="d-flex align-items-center pt-3">
+                                    <div class="form-check form-check-inline pl-5">
+                                        <input type="radio" asp-for="disponibitlité" value="true" class="form-check-input" />
+                                        <label class="form-check-label">Oui</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" asp-for="disponibitlité" value="false" class="form-check-input" />
+                                        <label class="form-check-label">Non</label>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="disponibitlité" class="text-danger"></span>
+                            </div>
+
+                            @* <div class="col-md-6 forFournisseur">
+                                <label asp-for="disponibitlité" class="form-label">Tu es disponible ?</label>
+                                <select asp-for="disponibitlité" class="form-control">
+                                    <option value="">Sélectionnez une disponibilité</option>
+                                    <option value="true">Oui</option>
+                                    <option value="false">Non</option>
+                                </select>
+                                <span asp-validation-for="disponibitlité" class="text-danger"></span>
+                            </div> *@
+                           
+                        }
+
+
+                        <div class="item form-group d-flex justify-content-center">
+                            <div class="col-md-6 col-sm-6 text-center ">
+                                <input type="submit" value="Mettre à jour le profil" class="btn btn-style btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+         
+            </div>
+        </div>
+    </div>
+</section>
+

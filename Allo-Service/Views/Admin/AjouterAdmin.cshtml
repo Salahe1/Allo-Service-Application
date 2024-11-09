@@ -1,0 +1,120 @@
+﻿@model AdminVm
+@{
+    Layout = "_AdminLayout";
+    var isEdit = Model?.Id > 0;
+    var formAction = isEdit ? "ModifierAdmin" : "AjouterAdmin";
+    var formTitle = isEdit ? "Modifier un Administrateur" : "Ajouter un Administrateur";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <form asp-action="@formAction" method="post" novalidate>
+                    <span class="section">@formTitle</span>
+
+                    <!-- Hidden input for ID -->
+                    @if (isEdit)
+                    {
+                        <input type="hidden" asp-for="Id" />
+                    }
+
+                    <!-- Nom -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Nom <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="Nom" placeholder="Entrer un Nom">
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Prénom -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Prénom <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="Prenom" placeholder="Entrer un Prénom">
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- CIN -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">CIN <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="CIN" placeholder="Entrer un CIN">
+                            <span asp-validation-for="CIN" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="Email" type="email" placeholder="Entrer un Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Telephone -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Telephone <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="Telephone" type="tel" placeholder="Entrer un numéro de téléphone">
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Role <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <select class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<Allo_Service.ViewModel.AdminVm.role>()">
+                                <option value="">Sélectionnez un rôle</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Ville -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Ville <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <select class="form-control" asp-for="villeId" asp-items="ViewBag.CityList">
+                                <option value="">Sélectionnez une ville</option>
+                            </select>
+                            <span asp-validation-for="villeId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Mot de Passe -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Mot de Passe <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="MotDePasse" type="password" placeholder="Entrer un Mot de Passe">
+                            <span asp-validation-for="MotDePasse" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Confirmation Mot de Passe -->
+                    <div class="field item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align">Confirmation Mot de Passe <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" asp-for="ConfirmationMotDePasse" type="password" placeholder="Confirmez votre mot de passe">
+                            <span asp-validation-for="ConfirmationMotDePasse" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="ln_solid">
+                        <div class="form-group">
+                            <div class="col-md-6 offset-md-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-success">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

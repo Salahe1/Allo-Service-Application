@@ -1,0 +1,72 @@
+﻿@model NotificationVM
+
+@{
+    Layout = "_AdminLayout";
+
+}
+
+
+<h1 class="mb-4">Envoyer une Notification</h1>
+<div class="x_content">
+<form asp-action="Add" class="mr-4">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="form-group">
+        <label asp-for="Titre" class="control-label"></label>
+        <input asp-for="Titre" class="form-control" />
+        <span asp-validation-for="Titre" class="text-danger"></span>
+    </div>
+
+    @*     <div class="form-group mr-4">
+    <label asp-for="Contenu" class="control-label"></label>
+    <input asp-for="Contenu" class="form-control" />
+    <span asp-validation-for="Contenu" class="text-danger"></span>
+    </div> *@
+    <div class="form-group mr-4">
+        <label asp-for="Contenu" class="control-label"></label>
+        <textarea id="Contenu" asp-for="Contenu" class="form-control"></textarea>
+        <span asp-validation-for="Contenu" class="text-danger"></span>
+    </div>
+
+
+    @*
+    <div class="form-group">
+    <label asp-for="AdministrateurId" class="control-label"></label>
+    <input asp-for="AdministrateurId" class="form-control" />
+    <span asp-validation-for="AdministrateurId" class="text-danger"></span>
+    </div>
+    *@
+
+    <div class="form-group">
+        <label for="userType">Send To:</label>
+        <select id="userType" name="userType" class="form-control">
+            <option value="Client">Clients</option>
+            <option value="Fournisseur">Fournisseurs</option>
+            <option value="All">All Users</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mr-4" id="sendButton">Envoyer</button>
+
+    <div class="mt-4">
+        <a href="@Url.Action("List", "Notification")" class="btn btn-secondary mb-4">Liste des Notifications</a>
+    </div>
+</form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tinymce@5.10.2/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+
+<script>
+    tinymce.init({
+        selector: '#Contenu',
+        plugins: 'advlist autolink lists link image charmap print preview anchor',
+        toolbar: 'undo redo | formatselect | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | link image | removeformat | code | fullscreen',
+        menubar: false,
+        statusbar: false
+    });
+</script>
+
+
+

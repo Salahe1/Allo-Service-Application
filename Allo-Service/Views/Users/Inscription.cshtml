@@ -1,0 +1,140 @@
+﻿@model InscriptionVM;
+
+
+@{
+    Layout = "_LoginLayout";
+}
+
+
+<div class="row justify-content-center pt-5">
+    <div class="col-md-7 scale-in-center">
+        <div class=" shadow-lg rounded-3 mb-3" style="width:100%;">
+            <!-- Added 'shadow-lg' and 'rounded-3' for style -->
+
+            <div class=" card-head pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Créer un compte</h5>
+                <p class="text-center small">Entrer vos donner personnelle pour créer votre compte</p>
+            </div>
+            <div class="card-body">
+
+                <form asp-action="Inscription" asp-controller="Users" method="post" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label asp-for="Nom" class="form-label"></label>
+                        <input asp-for="Nom" class="form-control" placeholder="Entrez votre nom" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Prenom" class="form-label"></label>
+                        <input asp-for="Prenom" class="form-control" placeholder="Entrez votre prénom" />
+                        <span asp-validation-for="Prenom" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="CIN" class="form-label"></label>
+                        <input asp-for="CIN" class="form-control" placeholder="Entrez votre CIN" />
+                        <span asp-validation-for="CIN" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Telephone" class="form-label"></label>
+                        <input asp-for="Telephone" class="form-control" placeholder="Entrez votre numéro : 06..." />
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Entrez votre email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="UserType" class="form-label">Type d'utilisateur</label>
+                        <select class="form-control" asp-for="UserType" id="chooseRole"  onchange="showelements()" asp-items="Html.GetEnumSelectList<InscriptionVM.userType>()">
+                            <option value="">Selectionez un role</option>
+                        </select>
+                        <span asp-validation-for="UserType" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="villeId" class="form-label">Ville</label>
+                        <select asp-for="villeId" class="form-control" asp-items="Model.Cities">
+                            <option value="">Sélectionnez une ville</option>
+                        </select>
+                        <span asp-validation-for="villeId" class="text-danger"></span> <!-- Optional: Validation message -->
+                    </div>
+
+                    <div class="col-md-6 forFournisseur" style="display:none">
+                        <label asp-for="metierId" class="form-label">Métier </label>
+                        <select asp-for="metierId" class="form-control"  asp-items="Model.Métiers">
+                            <option value="">Sélectionnez un métier</option>
+                        </select>
+                        <span asp-validation-for="metierId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Password</label>
+                        <input asp-for="MotDePasse" class="form-control" type="password" placeholder="Entrez votre mot de passe" />
+                        <span asp-validation-for="MotDePasse" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Confirmation of Password</label>
+                        <input asp-for="ConfirmMotDePasse" type="password" class="form-control" placeholder="Confirmez votre mot de passe" />
+                        <span asp-validation-for="ConfirmMotDePasse" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="col-12  d-flex justify-content-center pt-3">
+                        <input type="submit" name="submitType" value="S'inscrire" class="btn btn-primary btn-lg w-100"  />
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">
+                Tu as déja un account ? <a asp-controller="Authentification" asp-action="Login"> Click ici</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showelements() {
+
+              var role = document.querySelector("#chooseRole").value;
+            var forClient = document.getElementsByClassName("forClient");
+            var forFournisseur = document.getElementsByClassName("forFournisseur");
+
+            if (role == "Client") {
+                for (var i = 0; i < forClient.length; i++) {
+                    forClient[i].style.display = "block";
+                }
+                for (var i = 0; i < forFournisseur.length; i++) {
+                    forFournisseur[i].style.display = "none";
+                }
+                // Clear the metierId field to prevent validation errors
+                document.getElementById("metierId").value = ""; // Clear the metierId field for clients
+            } else if (role == "1") {
+                // for (var i = 0; i < forClient.length; i++) {
+                //     forClient[i].style.display = "none";
+                // }
+                for (var i = 0; i < forFournisseur.length; i++) {
+                    forFournisseur[i].style.display = "block";
+                }
+            } else {
+                for (var i = 0; i < forClient.length; i++) {
+                    forClient[i].style.display = "none";
+                }
+                for (var i = 0; i < forFournisseur.length; i++) {
+                    forFournisseur[i].style.display = "none";
+                }
+            } 
+   
+        }
+
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+          

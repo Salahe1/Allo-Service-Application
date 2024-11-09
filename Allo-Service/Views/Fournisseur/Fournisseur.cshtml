@@ -1,0 +1,216 @@
+﻿@model IEnumerable<Fournisseur>
+
+
+@{
+    Layout = "_HomeLayout";
+}
+
+// Check if the user is connected as a client
+@{
+    var isClientConnected = Context.Session.GetString("UserType") == "Client";
+}
+
+@section Styles{
+    <style>
+        /* Adjust the size of the stars */
+        .rating-star {
+            font-size: 20px; /* Reduce this value to make the stars smaller */
+        }
+
+            /* Optional: Reduce the margin between stars */
+            .rating-star + .rating-star {
+                margin-left: 3px; /* Reduce space between stars */
+            }
+
+        /* Optional: Style the vote count number */
+        .vote-count {
+            font-size: 12px; /* Smaller font for the vote count number */
+            color: #666; /* Optional: Adjust the color for the number */
+        }
+    </style>
+          }
+
+@* src="~/images/@fournisseur.Photo" *@
+<section class="w3l-grids-3 "">@* py-5 *@
+    <div class="container ">
+        @* py-md-5 py-3 *@
+        <div class="row bottom_grids pt-md-3 text-left">
+            @foreach (var fournisseur in Model)
+            {
+                <div class="col-lg-4 col-md-6 mt-5">
+
+                    <div class="grid-block scale-in-center">
+                        @if (fournisseur.Disponibiliter == true)
+                        {
+                            <div class="alert alert-info" role="alert">
+                                <strong>Disponible</strong>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                <strong>Pas disponible pour le moment</strong>
+                            </div>
+                        }
+                        <img src="@fournisseur.Photo" alt="Fournisseur Image" class="d-block w-100" style="height: 200px; object-fit: cover;">
+
+                        <h5 class="my-3">@fournisseur.Nom @fournisseur.Prenom</h5>
+
+                        <h6>
+                            <i class="fas fa-briefcase me-2"></i>
+                            <strong>Métier:</strong> @fournisseur.metier.Name
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <!-- Description -->
+                        <h6>
+                            <i class="fas fa-file-alt me-2"></i>
+                            <strong class="">Déscription: </strong>
+                                @fournisseur.Description
+
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <h6>
+                            <i class="fas fa-city  me-2"></i>
+                            <strong>ville:</strong> @fournisseur.Ville.Name
+                        </h6>
+
+                        <hr class="my-2">
+
+                        <!-- Telephone -->
+                        <h6>
+                            <i class="fas fa-phone"></i>
+                            <strong class="">Télèphone:</strong>
+                            @fournisseur.Telephone
+                        </h6>
+
+                        <hr class="my-2">
+                        <div class="d-flex justify-content-between align-items-center pb-2" style="height: 25px;">
+                            <div class="rating  pb-0">
+                                <div class="rating-container">
+                                    <span class="selected-rating">
+                                        @{
+                                            decimal averageRating = 0;
+                                            int voteCount = 0;
+                                            if (fournisseur.Avis?.Any() == true)
+                                            {
+                                                averageRating = (decimal)fournisseur.Avis.Average(a => a.Note);
+                                                voteCount = fournisseur.Avis.Count();
+                                            }
+                                            for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= Math.Floor(averageRating))
+                                                {
+                                                    <i class="fas fa-sm fa-star rating-star text-warning" data-value="@i"></i>
+                                                }
+                                                else if (i - 0.5 <= (double)averageRating && i > Math.Floor(averageRating))
+                                                {
+                                                    <i class="fas fa-star-half-alt rating-star text-warning" data-value="@i"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-star rating-star" data-value="@i"></i>
+                                                }
+                                            }
+                                        }
+                                    </span>
+                                    <span class="vote-count" style="font-size: 22px;">(@voteCount)</span>
+                                    <input type="hidden" id="fournisseurId" value="@fournisseur.Id" />
+                                </div>
+                            </div>
+                        </div>
+                        <span id="rating-message" class="alert alert-info d-inline-block py-0 px-0 m-0" style="display:none; font-size: 18px; color:black;"></span>
+
+                        <hr class="my-2">
+
+                        <div class="btn-group d-flex justify-content-center  align-items-center">
+                            <form method="get" asp-controller="" asp-action="">
+                                <input type="hidden" name="id" value="@fournisseur.Id" />
+                                <button type="submit" class="btn btn-sm btn-success message-btn px-5"
+                                @if (!isClientConnected)
+                                {
+                                    <text>disabled</text>
+                                }>
+                                    <i class="fas fa-comments pr-1"></i> Message</button>
+                            </form>
+
+                            <form method="get" asp-controller="Offre" asp-action="ListeOffresFournisseur">
+                                <input type="hidden" name="id" value="@fournisseur.Id" />
+                                <button type="submit" class="btn btn-sm btn-primary ml-1 px-5">
+                                    <i class="fas fa-eye pr-1"></i> Offres
+                                </button> <!-- Optional: fas fa-file-alt or fas fa-list -->
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".rating-star").on("click", function () {
+                var rating = $(this).data("value");
+                var fournisseurId = $("#fournisseurId").val();
+
+                $.ajax({
+                    url: '@Url.Action("SubmitRating", "Avis")', // Controller action
+                    type: 'POST',
+                    data: {
+                        fournisseurId: fournisseurId,
+                        rating: rating
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $("#rating-message")
+                                .text("Thank you for your rating!")
+                                .removeClass("alert-danger")
+                                .addClass("alert-info")
+                                .fadeIn();
+
+                            // Optionally, update the displayed rating and vote count
+                            $(".selected-rating").html(""); // Clear old stars
+                            for (let i = 1; i <= 5; i++) {
+                                if (i <= Math.floor(response.averageRating)) {
+                                    $(".selected-rating").append('<i class="fas fa-sm fa-star rating-star text-warning"></i>');
+                                } else if (i - 0.5 <= response.averageRating) {
+                                    $(".selected-rating").append('<i class="fas fa-star-half-alt rating-star text-warning"></i>');
+                                } else {
+                                    $(".selected-rating").append('<i class="fas fa-star rating-star"></i>');
+                                }
+                            }
+                            $(".vote-count").text("(" + response.voteCount + ")");
+
+                            // Hide the message after 3 seconds
+                            setTimeout(function () {
+                                $("#rating-message").fadeOut();
+                            }, 3000); // 3000 milliseconds = 3 seconds
+
+                        } else {
+                            $("#rating-message")
+                                .text("You need to be logged in to rate.")
+                                .removeClass("alert-info")
+                                .addClass("alert-danger")
+                                .fadeIn(2000);
+
+                            // Hide the error message after 3 seconds
+                            setTimeout(function () {
+                                $("#rating-message").fadeOut();
+                            }, 3000);
+                        }
+                    }
+
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿
+
+@{
+    Layout = "_HomeLayout";
+}
+@* @model Users; *@
+ @model ChangerMotPasseVM;
+ 
+
+<section class="w3l-grids-3 py-5">
+    <div class="container py-md-5 py-3">
+        <h2 class="title-w3l text-center mb-4">Changement de mot de passe</h2>
+
+        <div class=" radius-image  " style="padding-left: 400px;">
+            <div class="d-flex align-items-center mb-4">
+                <img src="~/imagesA/ClientFournisseurAvatar2.png" alt="Profile Picture" class="profile-picture radius-image-full mr-3" height="100px;">
+                <div>
+                    <h4 class="title-subhny">Model.Nom Model.Prenom</h4>
+                    <p class="font-italic">Model.Email</p>
+                </div>
+            </div>
+
+            <form method="post" action="../Users/ChangeMotPasse" class="form-horizontal">
+
+                <div class="item form-group">
+                    <label class="form-label">Mot de Passe Courent </label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="password" asp-for="motDePasse" class="form-control radius-image" placeholder="Entrez votre mot de passe">
+                        <span asp-validation-for="motDePasse" class="text-danger"></span>
+
+                    </div>
+                </div>  
+                
+                <div class="item form-group">
+                    <label class="col-form-label label-align">Nouveau Mot de Passe </label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="password" asp-for="nouveauMotDePasse" class="form-control radius-image" placeholder="Entrez nouveau mot de passe">
+                        <span asp-validation-for="nouveauMotDePasse" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="item form-group">
+                    <label class="col-form-label label-align">Confirmation du Nouveau Mot de Passe </label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="password" asp-for="confirmNouveauMotDePasse" class="form-control radius-image" placeholder="confirmez nouveau mot de passe">
+                        <span asp-validation-for="confirmNouveauMotDePasse" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+
+                <div class="ln_solid"></div>
+
+                <div class="item form-group">
+                    <div class="col-md-6 col-sm-6 text-center ">
+                        <input type="submit" value="changer le mot de passe" class="btn btn-style btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</section>

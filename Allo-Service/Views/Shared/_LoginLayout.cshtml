@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+
+@* @inject IHttpContextAccessor HttpContextAccessor
+ *@
+ <html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Allo Service - Accueil</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Accueil/assets/css/style-starter.css" asp-append-version="true">
+
+</head>
+@RenderSection("styles",required:false)
+
+<body  >
+    <!--header-->
+    <header id="site-header" class="nav-fixed">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0">
+                <a class="navbar-brand" href="">
+                    <img src="~/Accueil/assets/images/allo-service.png" alt="Votre logo" title="Votre logo" style="height:35px;" />
+                </a>
+                <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-lg-auto">
+                        <li class="nav-item ">
+                            <a id="a" class="nav-link" href="@Url.Action("Accueil","Home")">Accueil <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="b" class="nav-link" href="@Url.Action("Métier","Metier")">Metiers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="c" class="nav-link" href="@Url.Action("Fournisseur","Home")">Fournisseurs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="d" class="nav-link" href="@Url.Action("Offres","Offre")">Offres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="e" class="nav-link" href="@Url.Action("ContactUs","Home")">Contact</a>
+                        </li>
+                    </ul>
+                 
+                    
+                </div>
+
+                <!-- toggle switch for light and dark theme -->
+                
+                <div class="pr-3">
+                    <nav>
+                        <div>
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-moon"></i>
+                                    <i class="gg-sun"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="ms-4">
+                 
+                </div>
+            </nav>
+       </div>
+    </header>
+    <!--//header-->
+@*     <div style="width: 100vw; height: 80px; background-color:gray"></div>
+    *@
+    <div style="min-height:800px;">
+        @RenderBody()
+    </div>
+
+
+    <footer class="footer-17">
+        <div class="footer17_sur py-5">
+            <div class="container py-lg-5 py-md-4">
+                <div class="row footer17-top">
+                    <div class="col-lg-4 footer17-top-left2_sur pr-lg-5">
+                        <h6>About Us</h6>
+                        <p>
+                            Vestibulum ante ipsum primis in faucibus orci luctus turpis sodales quis. Integer sit amet mattis
+                            quam.Vivamus a ligula quam tesque et libero ut justo ultrices in.
+                        </p>
+                        <a href="#get" class="btn btn-style btn-primary mt-lg-5 mt-4">Contact Us</a>
+                    </div>
+                    <div class="col-lg-4 footer17-top-left1_sur mt-lg-0 my-5">
+                        <h6>Quick Links</h6>
+                        <div class="footer-listw3-grids">
+                            <ul class="footer-listw3">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="#">Blogs</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+
+                            </ul>
+                            <ul class="footer-listw3">
+                                <li><a href="#privacy">Privacy Policy</a></li>
+                                <li><a href="#term">Terms of use</a></li>
+                                <li><a href="#sales">Sales and Refunds</a></li>
+                                <li><a href="#faq">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 footer17-top-left4_sur footerw3-instagram pl-lg-5 ">
+                        <h6>Social Media</h6>
+                        <div class="row">
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/1.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/2.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/3.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/4.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/5.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/1.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                        </div>
+                        <ul class="footers-17_social mt-lg-5 mt-4">
+                            <li><a href="#url" class="twitter"><span class="fab fa-twitter"></span></a></li>
+                            <li><a href="#url" class="facebook"><span class="fab fa-facebook-f"></span></a></li>
+                            <li><a href="#url" class="linkedin"><span class="fab fa-linkedin-in"></span></a></li>
+                            <li><a href="#url" class="instagram"><span class="fab fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <div class="container">
+                    <div class="container">
+                        <p class="copy-footer-29">
+                            © 2021 Secttore. All rights reserved | Designed by <a href="https://w3layouts.com"
+                                                                                  target="_blank">W3layouts</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <i class="fas fa-long-arrow-alt-up"></i>
+            </button>
+
+        </div>
+    </footer>
+
+
+    <!-- //footer -->
+    <!-- Template JavaScript -->
+    <script src="~/Accueil/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Accueil/assets/js/theme-change.js"></script>
+    <script src="~/Accueil/assets/js/bootstrap.min.js"></script>
+
+
+    <script src="~/Accueil/assets/js/SomeFeatures.js"></script>
+
+
+   
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

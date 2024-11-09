@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+<html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Allo Service - Accueil</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/Accueil/assets/css/style-starter.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+   
+
+</head>
+@RenderSection("styles",required:false)
+
+<body>
+    <!--header-->
+    <header id="site-header" class="fixed-top nav-fixed">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0">
+                <a class="navbar-brand" href="">
+                    <img src="~/Accueil/assets/images/allo-service.png" alt="Votre logo" title="Votre logo" style="height:35px;" />
+                </a>
+                <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div style=" padding-right:20rem !important;" class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-lg-auto nav side-menu">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="@Url.Action("Accueil","Home")">DashBoard <span class="sr-only">(current)</span></a>
+                        </li>
+                       @*  <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Profil","Home")">Metiers</a>
+                        </li> *@
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Offres","Home")">Liste Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ListeOffresFournisseurCopy","Offre")">Gestion Offres</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ContactUs","Home")">Contact</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="pr-3">
+                    <nav>
+                        <div>
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-moon"></i>
+                                    <i class="gg-sun"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <div class=" navbar-collapse pt-3">
+                    <ul class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge badge-danger" id="notificationCount"></span>
+                        </a>
+
+                        <div class="dropdown-menu   custom-dropdown" aria-labelledby="notificationDropdown" style="max-height: 300px; overflow-y: auto; width: 320px;">
+                            <div class="dropdown-header bg-primary text-white text-center py-2">
+                                <strong>Notifications</strong>
+                            </div>
+                            <ul class="list-group list-group-flush" id="notificationList"></ul>
+                            <a href="#" class="dropdown-item text-center bg-light py-2 border-top" id="viewAllNotifications">
+                                View all notifications
+                            </a>
+                        </div>
+                    </ul>
+
+                    <ul class="navbar-right">
+                        <li class="nav-item dropdown open" style="padding-left: 15px;">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle" style="font-size: 24px;"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("ModifierProfil","Users")">Modifier Profil</a>
+                                <a class="dropdown-item" href="@Url.Action("ChangeMotPasse","Users")">Changer mot de passe</a>
+                                <a class="dropdown-item" href="@Url.Action("Create","Reclamation")">fait une reclamation</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout","Authentification")"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+           
+        </div>
+
+    </header>
+    <!--//header-->
+
+    <div class="w3l-grids-3 " style="min-height:800px;">
+        @RenderBody()
+    </div>
+
+    <footer class="footer-17">
+        <div class="footer17_sur py-5">
+            <div class="container py-lg-5 py-md-4">
+                <div class="row footer17-top">
+                    <div class="col-lg-4 footer17-top-left2_sur pr-lg-5">
+                        <h6>About Us</h6>
+                        <p>
+                            Vestibulum ante ipsum primis in faucibus orci luctus turpis sodales quis. Integer sit amet mattis
+                            quam.Vivamus a ligula quam tesque et libero ut justo ultrices in.
+                        </p>
+                        <a href="#get" class="btn btn-style btn-primary mt-lg-5 mt-4">Contact Us</a>
+                    </div>
+                    <div class="col-lg-4 footer17-top-left1_sur mt-lg-0 my-5">
+                        <h6>Quick Links</h6>
+                        <div class="footer-listw3-grids">
+                            <ul class="footer-listw3">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="#">Blogs</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+
+                            </ul>
+                            <ul class="footer-listw3">
+                                <li><a href="#privacy">Privacy Policy</a></li>
+                                <li><a href="#term">Terms of use</a></li>
+                                <li><a href="#sales">Sales and Refunds</a></li>
+                                <li><a href="#faq">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 footer17-top-left4_sur footerw3-instagram pl-lg-5 ">
+                        <h6>Social Media</h6>
+                        <div class="row">
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/1.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/2.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f">
+                                <a href="#"> <img src="~/Accueil/assets/images/3.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/4.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/5.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                            <div class="col-4 img-gd-f mt-4">
+                                <a href="#"> <img src="~/Accueil/assets/images/1.jpg" alt="" class="radius-image img-fluid"></a>
+                            </div>
+                        </div>
+                        <ul class="footers-17_social mt-lg-5 mt-4">
+                            <li><a href="#url" class="twitter"><span class="fab fa-twitter"></span></a></li>
+                            <li><a href="#url" class="facebook"><span class="fab fa-facebook-f"></span></a></li>
+                            <li><a href="#url" class="linkedin"><span class="fab fa-linkedin-in"></span></a></li>
+                            <li><a href="#url" class="instagram"><span class="fab fa-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <div class="container">
+                    <div class="container">
+                        <p class="copy-footer-29">
+                            © 2021 Secttore. All rights reserved | Designed by <a href="https://w3layouts.com"
+                                                                                  target="_blank">W3layouts</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <i class="fas fa-long-arrow-alt-up"></i>
+            </button>
+
+        </div>
+    </footer>
+    <!-- //footer -->
+
+
+
+    <!-- Template JavaScript -->
+    @*       <script src="@Url.Content("~/Accueil/assets/js/jquery-3.3.1.min.js")"></script>  *@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ @*    <script src="~/Accueil/assets/js/theme-change.js"></script>
+    <script src="~/Accueil/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> *@
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="@Url.Content("~/Accueil/assets/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Accueil/assets/js/theme-change.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("movetop").style.display = "block";
+            } else {
+                document.getElementById("movetop").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <!-- /move top -->
+    <script>
+        $(document).ready(function () {
+            $('.owl-one').owlCarousel({
+                loop: true,
+                margin: 0,
+                nav: true,
+                responsiveClass: true,
+                autoplay: false,
+                autoplayTimeout: 5000,
+                autoplaySpeed: 1000,
+                autoplayHoverPause: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    480: {
+                        items: 1,
+                        nav: true
+                    },
+                    667: {
+                        items: 1,
+                        nav: true
+                    },
+                    1000: {
+                        items: 1,
+                        nav: true
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //script -->
+    <script>
+        $(document).ready(function () {
+            $(".navbar-toggler").on("click", function () {
+                $("header").toggleClass("active");
+            });
+            $(document).on("ready", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+                $(window).on("resize", function () {
+                    if ($(window).width() > 991) {
+                        $("header").removeClass("active");
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").addClass("nav-fixed");/* .removeClass("nav-fixed"); */
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+
+
+
+    
+ @*    @if (HttpContextAccessor.HttpContext?.Session.GetInt32("Id") != null)
+    { *@
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+            var notificationCount = $("#notificationCount");
+
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:7062/notificationHub")
+                .withAutomaticReconnect()
+                .build();
+
+            connection.on("ReceiveNotification", (notification) => {
+                console.log(notification);
+
+                // Create a new notification element with a unique ID
+                const notificationId = `notification-${new Date().getTime()}`;
+
+                const notificationElement = `
+                <div id="${notificationId}" class="alert alert-primary alert-dismissible fade show" role="alert" style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 50%; z-index: 2000;display: flex;flex-direction: column;justify-content: center; background-color: rgba(255, 255, 255, 0.9);">
+                <strong id="notification-title" style="font-size: 18px; font-weight: bold; color: #333; text-align: center;">${notification.titre}</strong>
+                <p id="notification-content" style="font-size: 14px; color: #666;">${notification.contenu}</p>
+                </div>
+                `;
+
+                $("body").append(notificationElement);
+
+                // Create a new notification list item
+                const notificationItem = $('<a>', {
+                    href: '#',
+                    class: 'list-group-item list-group-item-action'
+                }).append(
+                    $('<strong>').text(notification.titre),
+                    notification.contenu,
+                    $("<small>").text(moment(notification.date_Notif).fromNow()) // Adding the time in
+                );
+
+                // Prepend the new notification to the notification list
+                $('#notificationList').prepend(notificationItem);
+
+                // Increment the notification count
+                let currentCount = parseInt(notificationCount.text(), 10) || 0;
+                currentCount++;
+                notificationCount.text(currentCount);
+
+                // Hide the notification after 5 seconds
+                setTimeout(function removeNotification() {
+                    $(`#${notificationId}`).remove();
+                }, 4000);
+            });
+
+            connection.start().then(() => {
+                connection.invoke("JoinGroup", '@HttpContextAccessor.HttpContext.Session.GetString("UserType")');
+            });
+        </script>
+@* 
+    }
+     *@
+    <script>
+
+        var notificationCount = $("#notificationCount");
+        $(document).ready(function () {
+
+            // Fetch the last 5 notifications
+            $.getJSON("@Url.Action("GetLastNotifications", "Notification")", function (data) {
+                console.log("Notifications received:", data);
+                $("#notificationList").empty(); // clear the list
+
+                //  $("#notificationCount").text(data.length);  update the notification count
+                notificationCount.text(0);
+                $.each(data, function (index, notification) {
+                    console.log("Adding notification:", notification);
+                    $("#notificationList").append("<a href='#' class='list-group-item list-group-item-action'>" +
+                        "<strong>" + (notification.titre || "No title") + "</strong>" +
+                        "<p>" + (notification.contenu || "No message") + "</p>" +
+                        "<small>" + moment(notification.date_Notif).fromNow() + "</small>" +
+                        "</a>");
+                });
+                // console.log("Notification list updated on load:", $("#notificationList").html());
+            });
+
+
+
+            $("#notificationDropdown").click(function () {
+                notificationCount.text(0);
+                // Fetch the last 5 notifications again
+                $.getJSON("@Url.Action("GetLastNotifications", "Notification")", function (data) {
+
+                    console.log("Notifications received:", data);
+
+                    $("#notificationList").empty(); //clear the list
+
+                    $.each(data, function (index, notification) {
+
+                        console.log("Adding notification:", notification);
+
+                        $("#notificationList").append("<a href='#' class='list-group-item list-group-item-action'>" +
+                            "<strong>" + (notification.titre || "No title") + "</strong>" +
+                            "<p>" + (notification.contenu || "No message") + "</p>" +
+                            "<small>" + moment(notification.date_Notif).fromNow() + "</small>" +
+                            "</a>");
+                    });
+                    // console.log("Notification list updated on click:", notificationList.html());
+                });
+            });
+
+
+
+            // Handle the click event for the "View all notifications" link
+            $("#viewAllNotifications").click(function (e) {
+                e.preventDefault();
+                window.location.href = "/Notification/List";
+            });
+        });
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+@*  <!-- libhtbox -->
+    <script src="~/Accueil/assets/js/lightbox-plus-jquery.min.js"></script>
+    <!-- libhtbox -->
+    <script src="~/Accueil/assets/js/owl.carousel.js"></script>
+    <!-- script for banner slider--> *@
+
+
+
+
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-smart-Wizard/1.9.0/js/jquery.smartWizard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> *@
+
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+@*
+    <script src="~/Accueil/assets/js/bootstrap.min.js"></script>
+    <script src="~/Accueil/assets/js/Formulaire/bootstrap.bundle.min.js"></script>
+    <script src="~/Accueil/assets/js/Formulaire/jquery.min.js"></script>
+    <script src="~/Accueil/assets/js/Formulaire/jquery.smartWizard.js"></script> *@

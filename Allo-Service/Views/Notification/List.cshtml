@@ -1,0 +1,68 @@
+﻿@model List<Notification>
+
+@{
+    Layout = "_AdminLayout";
+
+}
+
+
+<h1>List of Notifications</h1>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th>User Type</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var notification in Model)
+            {
+                <tr>
+                    <td>@notification.Titre</td>
+                    <td>@notification.Contenu</td>
+                    <td>@notification.UserType</td>
+                    <td>@notification.DateNotif</td>
+                    <td>
+                        <form method="post" asp-action="Delete" id="@notification.Id">
+                            <input type="hidden" asp-for="@notification.Id" name="id" />
+                            <button type="button" class="btn btn-danger confirm-delete">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <a href="@Url.Action("Add", "Notification")" class="btn btn-secondary mb-4">Go to Add Notification </a>
+    </div>
+}
+else
+{
+    <p>No notifications found.</p>
+}
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const confirmButtons = document.querySelectorAll(".confirm-delete");
+
+        confirmButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                const confirmation = confirm("Are you sure you want to delete this notification?");
+
+                if (confirmation) {
+                    // Submit form with matching ID
+                    this.parentElement.submit(); // Submit parent form (the one with the matching ID)
+                }
+            });
+        });
+    });
+
+</script>

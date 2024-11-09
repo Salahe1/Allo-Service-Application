@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+
+<section style="padding-top: 180px;">
+    <div class="container py-md-5 py-3 ">
+        <form id="demo-form2" asp-action="ajouter" asp-controller="Metier" class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+
+            <div class="item form-group row mb-4">
+                <label class="col-form-label col-md-3 col-sm-3 label-align text-center">Nom de Métier</label>
+                <div class="col-md-6 col-sm-9">
+                    <input class="form-control radius-image" name="MetierNom" placeholder="Enter title">
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label class="col-form-label col-md-3 col-sm-3 label-align text-center">Choisi une image :</label>
+                <div class="col-md-6 col-sm-9">
+                    <input type="file" name="formFile" class="form-control radius-image">
+                </div>
+            </div>
+
+
+            <div class="ln_solid mb-4"></div>
+
+            <div class="item form-group row">
+                <div class="col-md-6 col-sm-9 offset-md-3">
+                    <input type="submit" class="btn btn-style btn-primary btn-block" >
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
